@@ -6,6 +6,8 @@ using WordGuesser;
 public class GameContoller : MonoBehaviour
 {
     public UnityEngine.UI.Text Message;
+    public UnityEngine.UI.Text HiddenLetters;
+    public UnityEngine.UI.Text LettersGuessed;
     public UnityEngine.UI.Button StartButton;
 
     public GameObject StartScreen;
@@ -44,5 +46,4 @@ public class GameContoller : MonoBehaviour
         Debug.Log(this.guessingGame.CheckGuess(PlayerGuess.text));
         PlayerGuess.text = string.Empty;
     }
-    
 }
