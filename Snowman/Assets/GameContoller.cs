@@ -12,9 +12,13 @@ public class GameContoller : MonoBehaviour
     public UnityEngine.UI.Text GuessesRem;
 
     public UnityEngine.UI.Text GuessInfo;
+
+    public UnityEngine.UI.Text ActualWord;
     public UnityEngine.UI.Button StartButton;
 
     public UnityEngine.UI.Button PlayAgain;
+
+    public UnityEngine.UI.Button DareButton;
 
     public GameObject StartScreen;
 
@@ -22,9 +26,13 @@ public class GameContoller : MonoBehaviour
 
     public GameObject GameOverScreen;
 
-    private WordGuesser.WordGame guessingGame;
+    public GameObject GameWonScreen;
+
+    public WordGuesser.WordGame guessingGame;
 
     public UnityEngine.UI.InputField PlayerGuess;
+
+
 
 
     public void StartGame()
@@ -35,6 +43,8 @@ public class GameContoller : MonoBehaviour
 
         this.StartScreen.SetActive(false);
         this.PlayScreen.SetActive(true);
+        this.GameOverScreen.SetActive(false);
+        this.GameWonScreen.SetActive(false);
     }
 
     public void OpenStartScreen()
@@ -52,11 +62,29 @@ public class GameContoller : MonoBehaviour
 
     public void SubmitGuess()
     {
-        Debug.Log(this.guessingGame.CheckGuess(PlayerGuess.text));
+        //Debug.Log(this.guessingGame.CheckGuess(PlayerGuess.text));
         LettersGuessed.text = this.guessingGame.GetGuessedLetters();
         GuessesRem.text = $"{this.guessingGame.GetGuessLimit() - this.guessingGame.GetIncorrectGuesses()}";
         HiddenLetters.text = this.guessingGame.GetWord();
         GuessInfo.text = this.guessingGame.CheckGuess(PlayerGuess.text);
         PlayerGuess.text = string.Empty;
+        if (this.guessingGame.IsGameOver())
+        {
+            this.GameOverScreen.SetActive(true);
+            this.StartScreen.SetActive(false);
+            this.PlayScreen.SetActive(false);
+        }
+
+    }
+    public void OpenGameOverScreen()
+    {
+        this.GameOverScreen.SetActive(false);
+        this.StartScreen.SetActive(true);
+       this.PlayScreen.SetActive(false);
+    }
+
+    public void OpenGameWonScreen()
+    {
+
     }
 }
